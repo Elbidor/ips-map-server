@@ -33,6 +33,8 @@ def returnCoordinates():
     url = request.args.get('url')
     if url is None or len(url) == 0:
         return ''
+    if 'org/wiki/' in url:
+        url = url.replace('wiki/', 'w/index.php?title=')
     url += '&offset=&limit=100&action=history'
     ips = parse_page(url)
     res = post(url='http://ip-api.com/batch', json=ips).json()
@@ -51,6 +53,6 @@ def returnCoordinates():
     return json.dumps(output)
 
 
-# if __name__ == "__main__":
-#     app.debug = True
-#     app.run()
+if __name__ == "__main__":
+    app.debug = True
+    app.run()
