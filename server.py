@@ -34,7 +34,6 @@ def returnCoordinates():
     if url is None or len(url) == 0:
         return ''
     url += '&offset=&limit=100&action=history'
-
     ips = parse_page(url)
     res = post(url='http://ip-api.com/batch', json=ips).json()
     output = {
