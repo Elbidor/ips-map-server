@@ -1,10 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 from flask import request
 from requests import post
 import json
 
 app = Flask(__name__)
-
+cors = CORS(app)
 
 @app.route("/")
 def returnCoordinates():
