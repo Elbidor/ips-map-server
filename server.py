@@ -17,7 +17,7 @@ def returnCoordinates():
     for loc in res:
         place = {
             "coords": {
-                "lat": loc["lon"],
+                "lat": loc["lat"],
                 "lng": loc["lon"]
             },
             "text": loc["city"]
