@@ -26,6 +26,6 @@ def returnCoordinates():
     return json.dumps(placesObj)
 
 
-if __name__ == "__main__":
-    app.debug = True
-    app.run()
+# if __name__ == "__main__":
+#     app.debug = True
+#     app.run()
