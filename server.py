@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import request
-from requests import get
+from requests import post
 import json
 
 app = Flask(__name__)
@@ -9,23 +9,22 @@ app = Flask(__name__)
 @app.route("/")
 def returnCoordinates():
     ips = ['2.2.2.2', '8.8.8.8', '5.5.5.5']
-    placesObj = {
+    res = post(url='http://ip-api.com/batch', json=ips).json()
+    output = {
         "places": []
     }
-    for ip in ips:
-        loc = get(f'https://ipapi.co/{ip}/json/')
-        loc = loc.json()
-        placesObj["places"].append({
+    for loc in res:
+        place = {
             "coords": {
-                "lat": loc["latitude"],
-                "lng": loc["longitude"]
+                "lat": loc["lon"],
+                "lng": loc["lon"]
             },
             "text": loc["city"]
-        })
+        }
+        output["places"].append(place)
+    return json.dumps(output)
 
-    return json.dumps(placesObj)
 
-
-# if __name__ == "__main__":
-#     app.debug = True
-#     app.run()
+if __name__ == "__main__":
+    app.debug = True
+    app.run()
